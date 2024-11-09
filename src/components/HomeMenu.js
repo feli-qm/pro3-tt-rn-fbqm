@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
+import Users from '../screens/Users';
 import NewPost from '../screens/NewPost';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -26,6 +27,16 @@ export default function HomeMenu() {
                 options={{
                     tabBarIcon: () => ( //revisar si es necesario poner size={size} color={color} o esta ok asi
                         <Ionicons name="person" size={24} color="black" />
+                    ),
+                    headerShown: false
+                }}
+            />
+            <Tab.Screen
+                name="Users"
+                component={Users}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="person" size={size} color={color} />
                     ),
                     headerShown: false
                 }}

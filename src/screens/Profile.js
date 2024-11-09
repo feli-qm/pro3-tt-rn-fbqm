@@ -5,9 +5,6 @@ export default function Profile({ navigation }) {
     return (
         <View style={styles.container}>
             <Text>Pantalla de Profile</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text>Desloguearse</Text>
-            </TouchableOpacity>
         </View>
     );
 }
