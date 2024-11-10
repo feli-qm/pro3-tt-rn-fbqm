@@ -183,10 +183,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 10,
   },
-  preview: {
-    marginTop: 20,
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-  },
 });
