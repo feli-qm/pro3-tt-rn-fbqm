@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
 import { auth } from '../firebase/config';
 
 export default class Login extends Component {
@@ -14,12 +14,12 @@ export default class Login extends Component {
   }
 
   handleValidate = () => {
-    const {email, password} = this.state;
-    if (email === ''){
-        return "El campo de email es obligatorio.";
+    const { email, password } = this.state;
+    if (email === '') {
+      return "El campo de email es obligatorio.";
     }
-    if (password === ''){
-        return "El campo de contrasena es obligatorio.";
+    if (password === '') {
+      return "El campo de contrasena es obligatorio.";
     }
     return null;
   }
@@ -27,21 +27,23 @@ export default class Login extends Component {
   handleSubmit = (email, pass) => {
     const errorMsg = this.handleValidate();
     if (errorMsg) {
-        this.setState({errorMsg});
-        return;
+      this.setState({ errorMsg });
+      return;
     }
-    
+
     auth.
-    signInWithEmailAndPassword(email, pass)
-    .then((response) => {this.setState({registered: true, errorMsg: ""})
-    this.props.navigation.navigate('HomeMenu')})
-    .catch((error)=> {
-      console.log(error.message);
-      this.setState({errorMsg: error.message});
-    });
+      signInWithEmailAndPassword(email, pass)
+      .then((response) => {
+        this.setState({ registered: true, errorMsg: "" })
+        this.props.navigation.navigate('HomeMenu')
+      })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({ errorMsg: error.message });
+      });
   };
 
-  componentDidMount () {
+  componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.props.navigation.navigate('HomeMenu')
@@ -52,31 +54,30 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Ingresar</Text>
+        <View style={styles.formContainer}>
+          <Image style={styles.image}
+            source={require('../../assets/parfume.png')}
+            resizeMode='contain' />
+          <Text style={styles.title}>Ingresar</Text>
 
-        <TextInput style={styles.input}
-          keyboardType='email-address'
-          placeholder= 'email'
-          onChangeText={text=> this.setState({email: text})}
-          value={this.state.email} />
+          <TextInput style={styles.input}
+            keyboardType='email-address'
+            placeholder='email'
+            onChangeText={text => this.setState({ email: text })}
+            value={this.state.email} />
 
-        <TextInput style={styles.input}
-          keyboardType= 'default'
-          placeholder= 'password'
-          secureTextEntry={true}
-          onChangeText={text => this.setState({ password: text})}
-          value={this.state.password} />
+          <TextInput style={styles.input}
+            keyboardType='default'
+            placeholder='password'
+            secureTextEntry={true}
+            onChangeText={text => this.setState({ password: text })}
+            value={this.state.password} />
 
-        <Text>{this.state.errorMsg} </Text>
-
-        <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.password)}>
-            <Text style={styles.buttonText}> Login </Text>
-        </TouchableOpacity>
-
-        <View style={styles.preview}>
-            <Text>Email: {this.state.email}</Text>
-            <Text>Password: {this.state.password}</Text>
+          <Text>{this.state.errorMsg} </Text>
         </View>
+        <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.password)}>
+          <Text style={styles.buttonText}> Login </Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.buttonBlue}
@@ -90,50 +91,85 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: 10,
-      backgroundColor: '#f5f5f5',
-      marginTop: 20
-    },
-    title: {
-      fontSize: 32,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
-    input: {
-      height: 20,
-      paddingVertical: 15,
-      paddingHorizontal: 10,
-      borderWidth: 1,
-      borderColor: '#ccc',
-      borderStyle: 'solid',
-      borderRadius: 6,
-      marginVertical: 10
-    },
-    button: {
-        backgroundColor: '#28a745',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
-          },
-          buttonOrange: {
-            backgroundColor: '#f7a667',
-            padding: 15,
-            marginTop: 20,
-            borderRadius: 10,
-            width: '100%',
-            alignItems: 'center',
-          },
-          buttonText: {
-            color: '#fff',
-            fontWeight: 'bold',
-            fontSize: 16,
-          },
-        });
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#291009',
+  },
+  formContainer: {
+    width: '100%',
+    maxWidth: 400,
+    paddingVertical: 40,
+    paddingHorizontal: 30,
+    backgroundColor: '#fffaf9',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 5,
+    alignItems: 'center',
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 34,
+    fontFamily: 'Playfair Display',
+    fontWeight: 'bold',
+    color: '#703f30',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  input: {
+    height: 50,
+    width: '100%',
+    paddingHorizontal: 20,
+    fontSize: 16,
+    fontFamily: 'Playfair Display',
+    borderWidth: 1,
+    borderColor: '#dfb084',
+    borderRadius: 8,
+    backgroundColor: '#f2c2b8',
+    marginBottom: 20,
+    color: '#703f30',
+  },
+  button: {
+    backgroundColor: '#cd933f',
+    paddingVertical: 15,
+    width: '100%',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+    elevation: 3,
+  },
+  buttonLink: {
+    backgroundColor: 'transparent',
+    paddingVertical: 10,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Playfair Display',
+  },
+  errorMsg: {
+    color: '#D32F2F',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  preview: {
+    marginTop: 20,
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+  },
+});

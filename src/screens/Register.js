@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
 
 export default class Register extends Component {
@@ -16,16 +16,16 @@ export default class Register extends Component {
   }
 
   handleValidate = () => {
-    const {email, userName, password} = this.state;
+    const { email, userName, password } = this.state;
 
-    if (email === ''){
-        return "El campo de email es obligatorio.";
+    if (email === '') {
+      return "El campo de email es obligatorio.";
     }
-    if (userName === ''){
-        return "El campo de usuario es obligatorio.";
+    if (userName === '') {
+      return "El campo de usuario es obligatorio.";
     }
-    if (password === ''){
-        return "El campo de contrasena es obligatorio.";
+    if (password === '') {
+      return "El campo de contrasena es obligatorio.";
     }
 
     return null;
@@ -36,8 +36,8 @@ export default class Register extends Component {
 
     const errorMsg = this.handleValidate();
     if (errorMsg) {
-        this.setState({errorMsg});
-        return;
+      this.setState({ errorMsg });
+      return;
     }
     auth.
       createUserWithEmailAndPassword(email, pass)
@@ -54,7 +54,7 @@ export default class Register extends Component {
               //redireccionar a login
               this.setState({ registered: true, errorMsg: "" });
               this.props.navigation.navigate("Login");
-        })
+            })
             .catch((e) => console.log(e.message));
         }
       })
@@ -67,27 +67,31 @@ export default class Register extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Registro</Text>
+        <View style={styles.formContainer}>
+          <Image style={styles.image}
+            source={require('../../assets/parfume.png')}
+            resizeMode='contain' />
+          <Text style={styles.title}>Registro</Text>
 
-        <TextInput style={styles.input}
-          keyboardType='default'
-          placeholder='Ingrese su usuario'
-          onChangeText={text => this.setState({ userName: text })}
-          value={this.state.userName} />
+          <TextInput style={styles.input}
+            keyboardType='default'
+            placeholder='Ingrese su usuario'
+            onChangeText={text => this.setState({ userName: text })}
+            value={this.state.userName} />
 
-        <TextInput style={styles.input}
-          keyboardType='email-address'
-          placeholder='Ingrese su email'
-          onChangeText={text => this.setState({ email: text })}
-          value={this.state.email} />
+          <TextInput style={styles.input}
+            keyboardType='email-address'
+            placeholder='Ingrese su email'
+            onChangeText={text => this.setState({ email: text })}
+            value={this.state.email} />
 
-        <TextInput style={styles.input}
-          keyboardType='default'
-          placeholder='Ingrese su contrasena'
-          secureTextEntry={true}
-          onChangeText={text => this.setState({ password: text })}
-          value={this.state.password} />
-
+          <TextInput style={styles.input}
+            keyboardType='default'
+            placeholder='Ingrese su contrasena'
+            secureTextEntry={true}
+            onChangeText={text => this.setState({ password: text })}
+            value={this.state.password} />
+        </View>
         <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.password, this.state.userName)}>
           <Text style={styles.buttonText}> Registrar </Text>
         </TouchableOpacity>
@@ -108,46 +112,81 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    backgroundColor: '#f5f5f5',
-    marginTop: 20
+    padding: 20,
+    backgroundColor: '#291009',
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
+  formContainer: {
+    width: '100%',
+    maxWidth: 400,
+    paddingVertical: 40,
+    paddingHorizontal: 30,
+    backgroundColor: '#fffaf9',
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 10,
+    elevation: 5,
+    alignItems: 'center',
+  },
+  image: {
+    width: 150,
+    height: 150,
     marginBottom: 20,
   },
+  title: {
+    fontSize: 34,
+    fontFamily: 'Playfair Display',
+    fontWeight: 'bold',
+    color: '#703f30',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
   input: {
-    height: 20,
-    paddingVertical: 15,
-    paddingHorizontal: 10,
+    height: 50,
+    width: '100%',
+    paddingHorizontal: 20,
+    fontSize: 16,
+    fontFamily: 'Playfair Display',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderStyle: 'solid',
-    borderRadius: 6,
-    marginVertical: 10
+    borderColor: '#dfb084',
+    borderRadius: 8,
+    backgroundColor: '#f2c2b8',
+    marginBottom: 20,
+    color: '#703f30',
   },
   button: {
-    backgroundColor: '#28a745',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    textAlign: 'center',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#28a745'
+    backgroundColor: '#cd933f',
+    paddingVertical: 15,
+    width: '100%',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+    elevation: 3,
+  },
+  buttonLink: {
+    backgroundColor: 'transparent',
+    paddingVertical: 10,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 15,
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
+    fontFamily: 'Playfair Display',
+  },
+  errorMsg: {
+    color: '#D32F2F',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
   },
   preview: {
-    marginTop: 30,
-    padding: 10,
-    borderColor: '#ddd',
-    borderWidth: 1,
-    borderRadius: 6,
-    backgroundColor: '#f9f9f9',
-  }
+    marginTop: 20,
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+  },
 });
