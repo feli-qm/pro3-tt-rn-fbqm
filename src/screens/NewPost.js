@@ -53,10 +53,11 @@ export default class NewPost extends Component {
                         value={this.state.imagen}
                         multiline={true}
                         numberofLines={4} />
+
+                    <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.descripcion, this.state.imagen)}>
+                        <Text style={styles.buttonText}> Crear post </Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.descripcion, this.state.imagen)}>
-                    <Text style={styles.buttonText}> Crear post </Text>
-                </TouchableOpacity>
 
                 {this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}
 

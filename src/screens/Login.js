@@ -80,7 +80,7 @@ export default class Login extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.buttonBlue}
+          style={styles.buttonRedirect}
           onPress={() => this.props.navigation.navigate('Register')}
         >
           <Text style={styles.buttonText}>No tengo cuenta</Text>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#cd933f',
-    paddingVertical: 15,
+    paddingVertical: 10,
     width: '100%',
     borderRadius: 8,
     alignItems: 'center',
@@ -159,6 +159,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     fontFamily: 'Playfair Display',
+  },
+  buttonRedirect: {
+    backgroundColor: '#e1bee7',
+    paddingVertical: 10,
+    width: '100%',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+    elevation: 3,
   },
   errorMsg: {
     color: '#D32F2F',

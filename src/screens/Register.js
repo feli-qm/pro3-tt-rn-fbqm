@@ -99,6 +99,7 @@ export default class Register extends Component {
         {this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}
 
         <TouchableOpacity
+          style={styles.buttonRedirect}
           onPress={() => this.props.navigation.navigate('Login')}>
           <Text style={styles.buttonText}>Ya tengo cuenta</Text>
         </TouchableOpacity>
@@ -176,6 +177,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     fontFamily: 'Playfair Display',
+  },
+  buttonRedirect: {
+    backgroundColor: '#e1bee7',
+    paddingVertical: 10,
+    width: '100%',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+    elevation: 3,
   },
   errorMsg: {
     color: '#D32F2F',
