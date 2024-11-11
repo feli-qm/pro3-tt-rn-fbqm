@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
 
 export default class Profile extends Component {
@@ -17,7 +17,7 @@ export default class Profile extends Component {
         if (currentUser) {
             this.setState({
                 email: currentUser.email,
-                userName: currentUser.userName,
+                userName: currentUser.userName || 'Usuario',
             });
         }
     }
@@ -37,17 +37,24 @@ export default class Profile extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Perfil</Text>
-                <Text>Email: {this.state.email}</Text>
-                <Text>User Name: {this.state.userName}</Text>
+                <View style={styles.formContainer}>
+                    <Image style={styles.image}
+                        source={require('../../assets/parfume.png')}
+                        resizeMode='contain' 
+                    />
 
-                {this.state.errorMsg ? (
-                    <Text style={styles.error}>{this.state.errorMsg}</Text>
-                ) : null}
+                    <Text style={styles.title}>Perfil</Text>
+                    <Text style={styles.detail}>Email: {this.state.email}</Text>
+                    <Text style={styles.detail}>User Name: {this.state.userName}</Text>
 
-                <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
-                    <Text style={styles.buttonText}>Logout</Text>
-                </TouchableOpacity>
+                    {this.state.errorMsg ? (
+                        <Text style={styles.error}>{this.state.errorMsg}</Text>
+                    ) : null}
+
+                    <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
+                        <Text style={styles.buttonText}>Logout</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -55,27 +62,71 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+      backgroundColor: '#291009',
+    },
+    formContainer: {
+      width: '100%',
+      maxWidth: 400,
+      paddingVertical: 40,
+      paddingHorizontal: 30,
+      backgroundColor: '#fffaf9',
+      borderRadius: 15,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 10,
+      elevation: 5,
+      alignItems: 'center',
+    },
+    image: {
+      width: 150,
+      height: 150,
+      marginBottom: 20,
     },
     title: {
-        fontSize: 24,
-        marginBottom: 20,
+      fontSize: 34,
+      fontFamily: 'Playfair Display',
+      fontWeight: 'bold',
+      color: '#703f30',
+      textAlign: 'center',
+      marginBottom: 10,
+    },
+    detail: {
+      fontSize: 20,
+      fontFamily: 'Playfair Display',
+      color: '#703f30',
+      textAlign: 'center',
+      margin: 10,
     },
     button: {
-        backgroundColor: '#007bff',
-        padding: 10,
-        borderRadius: 5,
-        marginTop: 20,
+      backgroundColor: '#cd933f',
+      paddingVertical: 10,
+      width: '100%',
+      borderRadius: 8,
+      alignItems: 'center',
+      marginTop: 20,
+      elevation: 3,
     },
     buttonText: {
-        color: '#fff',
-        fontSize: 16,
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 18,
+      fontFamily: 'Playfair Display',
     },
-    error: {
-        color: 'red',
-        marginTop: 10,
+    errorMsg: {
+      color: '#D32F2F',
+      fontSize: 14,
+      textAlign: 'center',
+      marginTop: 10,
     },
-});
+    preview: {
+      marginTop: 20,
+      fontSize: 14,
+      color: '#666',
+      textAlign: 'center',
+    },
+  });
