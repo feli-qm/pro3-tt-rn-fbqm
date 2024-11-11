@@ -38,7 +38,7 @@ export default class Login extends Component {
         this.props.navigation.navigate('HomeMenu')
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.message.code);
         this.setState({ errorMsg: error.message });
       });
   };
@@ -174,11 +174,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     marginTop: 10,
-  },
-  preview: {
-    marginTop: 20,
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-  },
+  }
 });

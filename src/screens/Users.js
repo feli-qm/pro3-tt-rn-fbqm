@@ -59,9 +59,11 @@ export default class Users extends Component {
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                             <View style={styles.userItem}>
-                                <Text>Email: {item.data.email}</Text>
-                                <Text>Username: {item.data.userName}</Text>
-                                <Text>Created At: {item.data.createdAt}</Text>
+                                <View style={styles.userInfo}>
+                                    <Text>Email: {item.data.email}</Text>
+                                    <Text>Username: {item.data.userName}</Text>
+                                    <Text>Created At: {item.data.createdAt}</Text>
+                                </View>
                             </View>
                         )}
                     />
@@ -118,5 +120,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9f9f9',
         marginVertical: 8,
         borderRadius: 8,
+    },
+    userInfo: {
+        marginBottom: 10,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#dfb084',
+        borderRadius: 8,
+        backgroundColor: '#f2c2b8',
     },
 });
