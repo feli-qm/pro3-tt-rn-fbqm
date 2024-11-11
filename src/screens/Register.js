@@ -108,7 +108,11 @@ handleDisabled = () => {
             value={this.state.password} />
             <Text>{this.state.errorMsg} </Text>
         </View>
-        <TouchableOpacity style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button } onPress={() => this.handleSubmit(this.state.email, this.state.password, this.state.userName)} disabled= {this.state.isDisabled}>
+        <TouchableOpacity 
+          style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button } 
+          onPress={() => this.handleSubmit(this.state.email, this.state.password, this.state.userName)} 
+          disabled= {this.state.isDisabled}
+        >
           <Text style={styles.buttonText}> Registrar </Text>
         </TouchableOpacity>
 

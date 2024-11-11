@@ -9,8 +9,17 @@ export default class Login extends Component {
       email: '',
       password: '',
       registered: false,
-      errorMsg: ''
+      errorMsg: '',
+      isDisabled: true,
     };
+  }
+
+  handleDisabled = () => {
+    if (this.state.email !== "" && this.state.password !== "") {
+      this.setState({
+        isDisabled: false,
+      }
+    )} 
   }
 
   handleValidate = () => {
@@ -38,7 +47,7 @@ export default class Login extends Component {
         this.props.navigation.navigate('HomeMenu')
       })
       .catch((error) => {
-        console.log(error.message.code);
+        console.log(error.message);
         this.setState({ errorMsg: error.message });
       });
   };
@@ -63,19 +72,27 @@ export default class Login extends Component {
           <TextInput style={styles.input}
             keyboardType='email-address'
             placeholder='email'
-            onChangeText={text => this.setState({ email: text })}
+            onChangeText={text => {
+                this.handleDisabled()
+                this.setState({ email: text })}}
             value={this.state.email} />
 
           <TextInput style={styles.input}
             keyboardType='default'
             placeholder='password'
             secureTextEntry={true}
-            onChangeText={text => this.setState({ password: text })}
+            onChangeText={text => {
+                this.handleDisabled()
+                this.setState({ password: text })}}
             value={this.state.password} />
 
           <Text>{this.state.errorMsg} </Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.password)}>
+        <TouchableOpacity 
+            style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button} 
+            onPress={() => this.handleSubmit(this.state.email, this.state.password)} 
+            disabled= {this.state.isDisabled}
+        >
           <Text style={styles.buttonText}> Login </Text>
         </TouchableOpacity>
 
@@ -146,6 +163,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
     elevation: 3,
+  },
+  disabled: {
+    backgroundColor: 'grey',
   },
   buttonLink: {
     backgroundColor: 'transparent',

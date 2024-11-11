@@ -50,11 +50,10 @@ export default class Profile extends Component {
                     {this.state.errorMsg ? (
                         <Text style={styles.error}>{this.state.errorMsg}</Text>
                     ) : null}
-
-                    <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
-                        <Text style={styles.buttonText}>Logout</Text>
-                    </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
+                  <Text style={styles.buttonText}>Logout</Text>
+                </TouchableOpacity>
             </View>
         );
     }
