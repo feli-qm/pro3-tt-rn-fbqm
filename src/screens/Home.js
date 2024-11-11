@@ -35,7 +35,7 @@ export default class Home extends Component {
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <Post email = {item.data.email} mensaje = {item.data.mensaje}/>
+                        <Post email = {item.data.email} descripcion = {item.data.descripcion}/>
                     )}
                 />
             </View>

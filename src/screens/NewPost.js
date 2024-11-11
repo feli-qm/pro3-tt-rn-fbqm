@@ -12,7 +12,7 @@ export default class NewPost extends Component {
         };
     }
 
-    handleSubmit(email, imagen, descripcion) {
+    handleSubmit(imagen, descripcion) {
         db.collection('posts')
             .add({
                 email: auth.currentUser.email,
