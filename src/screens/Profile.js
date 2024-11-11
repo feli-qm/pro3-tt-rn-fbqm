@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../firebase/config';
+import { FlatList } from 'react-native-web';
 
 export default class Profile extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class Profile extends Component {
             email: '',
             userName: '',
             errorMsg: '',
+            userPosts: [],
         };
     }
 
@@ -20,6 +22,21 @@ export default class Profile extends Component {
                 userName: currentUser.userName || 'Usuario',
             });
         }
+
+        db.collection('posts').onSnapshot(
+          docs => {
+              let posts = [];
+              docs.forEach(doc => {
+                  posts.push({
+                      id: doc.id,
+                      data: doc.data()
+                  })
+                  this.setState({
+                      userPosts: this.state.posts.filter(p => p.data.email.toLowerCase().includes(this.state.email.toLowerCase))
+                  })
+              })
+          }
+        )
     }
 
     handleLogout() {
