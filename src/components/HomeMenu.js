@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
@@ -6,10 +6,24 @@ import Users from '../screens/Users';
 import NewPost from '../screens/NewPost';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { auth } from '../firebase/config';
 
 const Tab = createBottomTabNavigator();
 
-export default function HomeMenu() {
+export default class HomeMenu extends Component {
+    constructor(props){
+        super(props)
+    }
+
+    componentDidMount(){
+        auth.onAuthStateChanged((user) => {
+          if (!user) {
+            this.props.navigation.navigate("Login");
+          }
+        });
+      }
+
+    render(){
     return (
         <Tab.Navigator>
             <Tab.Screen
@@ -53,4 +67,5 @@ export default function HomeMenu() {
             />
         </Tab.Navigator>
     );
+}
 }

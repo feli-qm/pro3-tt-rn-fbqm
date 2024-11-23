@@ -14,7 +14,13 @@ export default class Register extends Component {
       isDisabled: true,
     };
   }
-
+componentDidMount(){
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      this.props.navigation.navigate("HomeMenu");
+    }
+  });
+}
 
 handleDisabled = () => {
   if (this.state.email !== ""  && this.state.userName !== ""  && this.state.password !== "") {
@@ -147,7 +153,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 10,
-    elevation: 5,
     alignItems: 'center',
   },
   image: {
@@ -183,7 +188,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
-    elevation: 3,
   },
   disabled: {
     backgroundColor: 'grey',
@@ -208,7 +212,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
-    elevation: 3,
   },
   errorMsg: {
     color: '#D32F2F',

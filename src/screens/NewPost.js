@@ -18,7 +18,8 @@ export default class NewPost extends Component {
                 email: auth.currentUser.email,
                 imagen: imagen,
                 descripcion: descripcion,
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                likes : []
             })
             .then(() => {
                 //redireccionar a login
@@ -85,7 +86,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.15,
         shadowRadius: 10,
-        elevation: 5,
         alignItems: 'center',
     },
     image: {
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         alignItems: 'center',
         marginTop: 20,
-        elevation: 3,
     },
     buttonLink: {
         backgroundColor: 'transparent',

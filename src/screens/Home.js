@@ -9,21 +9,26 @@ export default class Home extends Component {
         super(props);
         this.state = {
             posts: [],
+            loading: true
         };
     }
     componentDidMount(){
-        db.collection('posts').onSnapshot(
-            docs => {
+        this.setState({
+            loading: true
+        })
+        db.collection('posts').orderBy("createdAt", "desc").onSnapshot(
+            (docs) => {
                 let posts = [];
-                docs.forEach(doc => {
+                docs.forEach((doc) => {
                     posts.push({
                         id: doc.id,
-                        data: doc.data()
-                    })
+                        data: doc.data(),
+                    });
                     this.setState({
-                        posts: posts
-                    })
-                })
+                        posts: posts,
+                        loading: false,
+                    });
+                });
             }
         )
     }
@@ -31,13 +36,14 @@ export default class Home extends Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>Posts</Text>
-                <FlatList
+                {!this.state.loading && <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <Post email = {item.data.email} descripcion = {item.data.descripcion}/>
+                        <Post item = {item}/>
                     )}
-                />
+                />}
+                
             </View>
         );
     }
