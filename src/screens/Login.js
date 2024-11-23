@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Playfair Display',
   },
   buttonRedirect: {
-    backgroundColor: '#e1bee7',
+    backgroundColor: '#dfb084',
     paddingVertical: 10,
     width: '100%',
     borderRadius: 8,
