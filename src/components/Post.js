@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-web';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
+import { PiHeartStraightFill } from "react-icons/pi";
+import { PiHeartStraightLight } from "react-icons/pi";
 
 export default class Post extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ export default class Post extends Component {
         db.collection('posts').doc(this.props.item.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
-        .then(() => this.setState({
+            .then(() => this.setState({
                 like: true,
                 cantidad: this.props.item.data.likes.length
 
@@ -36,7 +38,7 @@ export default class Post extends Component {
         db.collection('posts').doc(this.props.item.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
-        .then(() => this.setState({
+            .then(() => this.setState({
                 like: false,
                 cantidad: this.props.item.data.likes.length
             }))
@@ -45,19 +47,23 @@ export default class Post extends Component {
     render() {
         const { email, imagen, likes, descripcion } = this.props.item.data;
         return (
-            <View style={styles.userInfo}>
-                <Text styles={styles.autor}>Email: {email}</Text>
-                <Text>Descripcion: {descripcion}</Text>
+            <View style={styles.container}>
+                <View style={styles.containerHeader}>
+                <Text style={styles.autor}>Email: {email}</Text>
+                </View>
+                <Text style={styles.descripcion}>Descripcion: {descripcion}</Text>
+                <View style={styles.likes}>
                 {this.state.like ? (
                     <TouchableOpacity onPress={() => this.handleUnlike()}>
-                        <Text>Ya no me gusta</Text>
+                        <PiHeartStraightFill style={styles.buttonLike} />
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity onPress={() => this.handleLike()}>
-                        <Text>Like</Text>
+                        <PiHeartStraightLight style={styles.buttonUnike} />
                     </TouchableOpacity>
                 )}
-                <Text>Cantidad de likes:  {this.state.cantidad} </Text>
+                <Text style={styles.contador}>{this.state.cantidad} Likes</Text>
+                </View>
             </View>
         );
     }
@@ -65,61 +71,46 @@ export default class Post extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#291009',
+        backgroundColor: '#fff',
+        borderRadius: 14,
+        marginBottom: 22,
+        padding: 14,
+        shadowColor: '#004',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 6,
     },
-    formContainer: {
-        width: '100%',
-        maxWidth: 400,
-        paddingVertical: 40,
-        paddingHorizontal: 30,
-        backgroundColor: '#fffaf9',
-        borderRadius: 15,
+    containerHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        marginBottom: 11,
     },
-    title: {
-        fontSize: 34,
+    autor: {
+        fontSize: 14,
         fontWeight: 'bold',
         color: '#703f30',
-        textAlign: 'center',
-        marginBottom: 10,
     },
-    subtitle: {
-        fontSize: 20,
+    descripcion: {
+        fontSize: 15,
+        color: '#333',
+        lineHeight: 26,
+        marginBottom: 16, 
+    },
+    likes: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    buttonLike: {
+        color: '#f2c2b8',
+    },
+    buttonUnike: {
+        color: '#f2c2b8',
+    },
+    contador: {
+        fontSize: 13,
         color: '#703f30',
-        textAlign: 'center',
-        margin: 10,
-    },
-    autor:{
-        textAlign: "right"
-    },
-    input: {
-        height: 50,
-        width: '100%',
-        paddingHorizontal: 20,
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: '#dfb084',
-        borderRadius: 8,
-        backgroundColor: '#f2c2b8',
-        marginBottom: 20,
-        color: '#703f30',
-    },
-    userItem: {
-        padding: 15,
-        backgroundColor: '#f9f9f9',
-        marginVertical: 8,
-        borderRadius: 8,
-    },
-    userInfo: {
-        marginBottom: 10,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#dfb084',
-        borderRadius: 8,
-        backgroundColor: '#f2c2b8',
+        marginLeft: 11,
     },
 });

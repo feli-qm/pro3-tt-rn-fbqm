@@ -57,7 +57,6 @@ handleDisabled = () => {
     auth.
       createUserWithEmailAndPassword(email, pass)
       .then((response) => {
-        //Vamos a agregar el usuario a la collection users
         if (response) {
           db.collection('users')
             .add({

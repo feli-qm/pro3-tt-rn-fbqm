@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { FlatList } from 'react-native-web';
 import {db} from '../firebase/config';
 import Post from '../components/Post';
@@ -35,6 +35,12 @@ export default class Home extends Component {
     render(){
         return (
             <View style={styles.container}>
+                <View style={styles.logoContainer}>
+                <Image style={styles.logo}
+                        source={require('../../assets/parfume-sinfondo.png')}
+                        resizeMode='contain' 
+                    />
+                    </View>
                 <Text style={styles.title}>Posts</Text>
                 {!this.state.loading && <FlatList
                     data={this.state.posts}
@@ -52,16 +58,25 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#f5f5f5',
-        padding: 20,
+        paddingTop: 20,
+        paddingHorizontal: 20,
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain',
     },
     title: {
         fontSize: 28,
         fontWeight: 'bold',
         color: '#6f4e37',
         marginBottom: 10,
+        textAlign: 'center',
     },
     description: {
         fontSize: 16,

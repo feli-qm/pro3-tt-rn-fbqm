@@ -22,7 +22,6 @@ export default class NewPost extends Component {
                 likes : []
             })
             .then(() => {
-                //redireccionar a login
                 this.setState({ registered: true, errorMsg: "" });
                 this.props.navigation.navigate("Home");
             })
