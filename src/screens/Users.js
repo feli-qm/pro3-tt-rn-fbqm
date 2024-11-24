@@ -51,21 +51,26 @@ export default class Users extends Component {
                         onChangeText={this.userFilter}
                         value={this.state.filterValue}
                     />
-
-                    <FlatList
-                        style={styles.list}
-                        data={this.state.usuariosFiltrados}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => (
-                            <View style={styles.userItem}>
-                                <View style={styles.userInfo}>
-                                    <Text>Email: {item.data.email}</Text>
-                                    <Text>Username: {item.data.userName}</Text>
-                                    <Text>Created At: {item.data.createdAt}</Text>
+                    {this.state.usuariosFiltrados.length === 0 ? (
+                        <Text>El email no existe</Text>
+                    ) : (
+                        <FlatList
+                            style={styles.list}
+                            data={this.state.usuariosFiltrados}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({ item }) => (
+                                <View style={styles.userItem}>
+                                    <View style={styles.userInfo}>
+                                        <Text>Email: {item.data.email}</Text>
+                                        <Text>Username: {item.data.userName}</Text>
+                                        <Text>Created At: {item.data.createdAt}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                        )}
-                    />
+                            )}
+                        />
+                    )}
+
+
                 </View>
             </View>
         );
