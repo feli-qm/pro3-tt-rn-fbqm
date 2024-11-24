@@ -48,11 +48,11 @@ export default class Profile extends Component {
         this.setState({ errorMsg: 'Error al desloguear. Intenta de nuevo.' });
       });
   }
-  
+
   handleDeletePost = (postId) => {
     db.collection('posts').doc(postId).delete()
       .then(() => {
-        const updatedPosts = this.state.userPosts.filter(p => p.id !== postId) 
+        const updatedPosts = this.state.userPosts.filter(p => p.id !== postId)
         this.setState({
           userPosts: updatedPosts
         });
@@ -63,34 +63,38 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.formContainer}>
-          <Image style={styles.image}
-            source={require('../../assets/parfume.png')}
+
+        <View style={styles.logoContainer}>
+          <Image style={styles.logo}
+            source={require('../../assets/parfume-sinfondo.png')}
             resizeMode='contain'
           />
+        </View>
 
-          <Text style={styles.title}>Perfil</Text>
+        <Text style={styles.title}>Tu Perfil</Text>
+
+        <View style={styles.userContainer}>
           <Text style={styles.detail}>Email: {this.state.email}</Text>
           <Text style={styles.detail}>User Name: {this.state.userName}</Text>
           <Text style={styles.detail}>Número de posts: {this.state.userPosts.length}</Text>
-
           {this.state.errorMsg ? (
             <Text style={styles.error}>{this.state.errorMsg}</Text>
           ) : null}
-
-          <FlatList 
-            data={this.state.userPosts}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Post item = {item}/>
-            )}
-          />
-  
+          <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
+        <FlatList
+          data={this.state.userPosts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Post item={item} />
+          )}
+        />
+
+
+
 
       </View>
     );
@@ -100,16 +104,24 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#291009',
+    backgroundColor: '#f5f5f5',
+    paddingTop: 20,
+    paddingHorizontal: 20,
   },
-  formContainer: {
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  userContainer: {
     width: '100%',
     maxWidth: 400,
-    paddingVertical: 40,
-    paddingHorizontal: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     backgroundColor: '#fffaf9',
     borderRadius: 15,
     shadowColor: '#000',
@@ -125,32 +137,29 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 34,
-    fontFamily: 'Playfair Display',
     fontWeight: 'bold',
     color: '#703f30',
     textAlign: 'center',
     marginBottom: 10,
   },
   detail: {
-    fontSize: 20,
-    fontFamily: 'Playfair Display',
+    fontSize: 16,
     color: '#703f30',
     textAlign: 'center',
-    margin: 10,
+    margin: 5,
   },
   button: {
     backgroundColor: '#cd933f',
-    paddingVertical: 10,
+    paddingVertical: 5,
     width: '100%',
     borderRadius: 8,
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   buttonText: {
     color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-    fontFamily: 'Playfair Display',
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   errorMsg: {
     color: '#D32F2F',
