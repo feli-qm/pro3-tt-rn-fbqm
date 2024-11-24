@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { FlatList } from 'react-native-web';
-import {db} from '../firebase/config';
+import { db } from '../firebase/config';
 import Post from '../components/Post';
 
 export default class Home extends Component {
@@ -12,7 +12,7 @@ export default class Home extends Component {
             loading: true
         };
     }
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             loading: true
         })
@@ -32,24 +32,24 @@ export default class Home extends Component {
             }
         )
     }
-    render(){
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
-                <Image style={styles.logo}
+                    <Image style={styles.logo}
                         source={require('../../assets/parfume-sinfondo.png')}
-                        resizeMode='contain' 
+                        resizeMode='contain'
                     />
-                    </View>
+                </View>
                 <Text style={styles.title}>Posts</Text>
                 {!this.state.loading && <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <Post item = {item}/>
+                        <Post item={item} />
                     )}
                 />}
-                
+
             </View>
         );
     }

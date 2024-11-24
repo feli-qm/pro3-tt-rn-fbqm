@@ -33,9 +33,7 @@ export default class Users extends Component {
     userFilter = (text) => {
         this.setState({
             filterValue: text,
-            usuariosFiltrados: this.state.usuarios.filter(u =>
-                u.data.email.toLowerCase().includes(text.toLowerCase())
-            ),
+            usuariosFiltrados: this.state.usuarios.filter(u => u.data.email.toLowerCase().includes(text.toLowerCase())),
         });
     };
 
@@ -55,6 +53,7 @@ export default class Users extends Component {
                     />
 
                     <FlatList
+                        style={styles.list}
                         data={this.state.usuariosFiltrados}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
@@ -129,4 +128,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         backgroundColor: '#f2c2b8',
     },
+    flatlist: {
+        flex: 1,
+        width: '100%',
+    }
 });
