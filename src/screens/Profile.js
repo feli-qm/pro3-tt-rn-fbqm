@@ -48,6 +48,17 @@ export default class Profile extends Component {
         this.setState({ errorMsg: 'Error al desloguear. Intenta de nuevo.' });
       });
   }
+  
+  handleDeletePost = (postId) => {
+    db.collection('posts').doc(postId).delete()
+      .then(() => {
+        const updatedPosts = this.state.userPosts.filter(p => p.id !== postId) 
+        this.setState({
+          userPosts: updatedPosts
+        });
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
     return (

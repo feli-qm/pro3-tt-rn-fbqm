@@ -5,6 +5,7 @@ import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { PiHeartStraightFill } from "react-icons/pi";
 import { PiHeartStraightLight } from "react-icons/pi";
+import { PiTrash } from "react-icons/pi";
 
 export default class Post extends Component {
     constructor(props) {
@@ -44,26 +45,40 @@ export default class Post extends Component {
             }))
     }
 
+    handleDelete() {
+        db.collection('posts').doc(this.props.item.id).delete()
+            .then(() => {
+                console.log('Post eliminado');
+            })
+            .catch(error => console.error('Error eliminando post:', error));
+    }
+
+
     render() {
         const { email, imagen, likes, descripcion } = this.props.item.data;
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
-                <Text style={styles.autor}>Email: {email}</Text>
+                    <Text style={styles.autor}>Email: {email}</Text>
                 </View>
                 <Text style={styles.descripcion}>Descripcion: {descripcion}</Text>
                 <View style={styles.likes}>
-                {this.state.like ? (
-                    <TouchableOpacity onPress={() => this.handleUnlike()}>
-                        <PiHeartStraightFill style={styles.buttonLike} />
-                    </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity onPress={() => this.handleLike()}>
-                        <PiHeartStraightLight style={styles.buttonUnike} />
+                    {this.state.like ? (
+                        <TouchableOpacity onPress={() => this.handleUnlike()}>
+                            <PiHeartStraightFill style={styles.buttonLike} />
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity onPress={() => this.handleLike()}>
+                            <PiHeartStraightLight style={styles.buttonUnike} />
+                        </TouchableOpacity>
+                    )}
+                    <Text style={styles.contador}>{this.state.cantidad} Likes</Text>
+                </View>
+                {email === auth.currentUser.email && (
+                    <TouchableOpacity onPress={() => this.handleDelete()}>
+                        <PiTrash style={styles.deleteButton} />
                     </TouchableOpacity>
                 )}
-                <Text style={styles.contador}>{this.state.cantidad} Likes</Text>
-                </View>
             </View>
         );
     }
@@ -76,7 +91,7 @@ const styles = StyleSheet.create({
         marginBottom: 22,
         padding: 14,
         shadowColor: '#004',
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 6,
     },
@@ -95,7 +110,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#333',
         lineHeight: 26,
-        marginBottom: 16, 
+        marginBottom: 16,
     },
     likes: {
         flexDirection: 'row',
@@ -113,4 +128,10 @@ const styles = StyleSheet.create({
         color: '#703f30',
         marginLeft: 11,
     },
+    deleteButton: {
+        color: '#f2c2b8'
+    },
+    deleteButtonText: {
+        color: '#f2c2b8'
+    }
 });
