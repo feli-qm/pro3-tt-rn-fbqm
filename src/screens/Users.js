@@ -37,6 +37,17 @@ export default class Users extends Component {
         });
     };
 
+    formatDate = (unixTimestamp) => {
+        const date = new Date(unixTimestamp); 
+        return date.toLocaleString('es-ES', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric', 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        });
+      };
+
     render() {
         return (
             <View style={styles.container}>
@@ -46,7 +57,7 @@ export default class Users extends Component {
                         resizeMode='contain'
                     />
                 </View>
-                
+
                 <Text style={styles.title}>Users</Text>
                 <Text style={styles.subtitle}>Search users</Text>
 
@@ -65,11 +76,12 @@ export default class Users extends Component {
                         data={this.state.usuariosFiltrados}
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
-                                <View style={styles.userContainer}>
-                                    <Text style={styles.email}>Email: {item.data.email}</Text>
-                                    <Text>Username: {item.data.userName}</Text>                            
-                                </View>
-                            )
+                            <View style={styles.userContainer}>
+                                <Text style={styles.email}>{item.data.email}</Text>
+                                <Text>{item.data.userName}</Text>
+                                <Text>{this.formatDate(item.data.createdAt)}</Text>
+                            </View>
+                        )
                         }
                     />
                 )}
@@ -113,16 +125,16 @@ const styles = StyleSheet.create({
         color: '#703f30',
     },
     input: {
-      height: 50,
-      width: '100%',
-      paddingHorizontal: 20,
-      fontSize: 16,
-      borderWidth: 1,
-      borderColor: '#dfb084',
-      borderRadius: 8,
-      backgroundColor: '#f2c2b8',
-      marginBottom: 20,
-      color: '#703f30',
+        height: 50,
+        width: '100%',
+        paddingHorizontal: 20,
+        fontSize: 16,
+        borderWidth: 1,
+        borderColor: '#dfb084',
+        borderRadius: 8,
+        backgroundColor: '#f2c2b8',
+        marginBottom: 20,
+        color: '#703f30',
     },
     userContainer: {
         backgroundColor: '#fff',
@@ -133,5 +145,5 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 6,
-      }
+    }
 });
