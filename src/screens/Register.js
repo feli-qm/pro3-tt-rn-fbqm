@@ -104,7 +104,7 @@ handleDisabled = () => {
 
           <TextInput style={styles.input}
             keyboardType='default'
-            placeholder='Ingrese su contrasena'
+            placeholder='Ingrese su contraseña'
             secureTextEntry={true}
             onChangeText={text => {
               this.handleDisabled()
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 34,
-    fontFamily: 'Playfair Display',
     fontWeight: 'bold',
     color: '#703f30',
     textAlign: 'center',
@@ -171,7 +170,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
     fontSize: 16,
-    fontFamily: 'Playfair Display',
     borderWidth: 1,
     borderColor: '#dfb084',
     borderRadius: 8,
@@ -194,7 +192,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
-    fontFamily: 'Playfair Display',
   },
   buttonRedirect: {
     backgroundColor: '#dfb084',
