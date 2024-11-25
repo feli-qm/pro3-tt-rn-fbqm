@@ -19,7 +19,8 @@ export default class Login extends Component {
       this.setState({
         isDisabled: false,
       }
-    )} 
+      )
+    }
   }
 
   handleValidate = () => {
@@ -48,10 +49,11 @@ export default class Login extends Component {
       })
       .catch((error) => {
         console.log(error.message);
-        if (error.code === "auth/internal-error"){
-          this.setState({errorMsg: "Invalid login credentials"})
+        if (error.code === "auth/internal-error") {
+          this.setState({ errorMsg: "Invalid login credentials" })
         } else {
-        this.setState({ errorMsg: error.message });}
+          this.setState({ errorMsg: error.message });
+        }
       });
   };
 
@@ -76,8 +78,9 @@ export default class Login extends Component {
             keyboardType='email-address'
             placeholder='Ingrese su email'
             onChangeText={text => {
-                this.handleDisabled()
-                this.setState({ email: text })}}
+              this.handleDisabled()
+              this.setState({ email: text })
+            }}
             value={this.state.email} />
 
           <TextInput style={styles.input}
@@ -85,16 +88,17 @@ export default class Login extends Component {
             placeholder='Ingrese su password'
             secureTextEntry={true}
             onChangeText={text => {
-                this.handleDisabled()
-                this.setState({ password: text })}}
+              this.handleDisabled()
+              this.setState({ password: text })
+            }}
             value={this.state.password} />
 
           <Text>{this.state.errorMsg} </Text>
         </View>
-        <TouchableOpacity 
-            style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button} 
-            onPress={() => this.handleSubmit(this.state.email, this.state.password)} 
-            disabled= {this.state.isDisabled}
+        <TouchableOpacity
+          style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button}
+          onPress={() => this.handleSubmit(this.state.email, this.state.password)}
+          disabled={this.state.isDisabled}
         >
           <Text style={styles.buttonText}> Login </Text>
         </TouchableOpacity>

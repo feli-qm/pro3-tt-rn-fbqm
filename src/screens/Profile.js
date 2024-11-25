@@ -33,6 +33,7 @@ export default class Profile extends Component {
             data: doc.data()
           })
         })
+        posts.sort((a, b) => b.data.createdAt - a.data.createdAt);
         this.setState({ userPosts: posts })
       })
   }
@@ -51,12 +52,6 @@ export default class Profile extends Component {
 
   handleDeletePost = (postId) => {
     db.collection('posts').doc(postId).delete()
-      .then(() => {
-        const updatedPosts = this.state.userPosts.filter(p => p.id !== postId)
-        this.setState({
-          userPosts: updatedPosts
-        });
-      })
       .catch(err => console.log(err))
   }
 

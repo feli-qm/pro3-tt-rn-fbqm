@@ -14,21 +14,22 @@ export default class Register extends Component {
       isDisabled: true,
     };
   }
-componentDidMount(){
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      this.props.navigation.navigate("HomeMenu");
-    }
-  });
-}
+  componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.props.navigation.navigate("HomeMenu");
+      }
+    });
+  }
 
-handleDisabled = () => {
-  if (this.state.email !== ""  && this.state.userName !== ""  && this.state.password !== "") {
-    this.setState({
-      isDisabled: false,
+  handleDisabled = () => {
+    if (this.state.email !== "" && this.state.userName !== "" && this.state.password !== "") {
+      this.setState({
+        isDisabled: false,
+      }
+      )
     }
-  )} 
-}
+  }
 
   handleValidate = () => {
     const { email, userName, password } = this.state;
@@ -89,9 +90,10 @@ handleDisabled = () => {
           <TextInput style={styles.input}
             keyboardType='default'
             placeholder='Ingrese su usuario'
-            onChangeText={text => { 
+            onChangeText={text => {
               this.handleDisabled()
-              this.setState({ userName: text })}}
+              this.setState({ userName: text })
+            }}
             value={this.state.userName} />
 
           <TextInput style={styles.input}
@@ -99,7 +101,8 @@ handleDisabled = () => {
             placeholder='Ingrese su email'
             onChangeText={text => {
               this.handleDisabled()
-              this.setState({ email: text })}}
+              this.setState({ email: text })
+            }}
             value={this.state.email} />
 
           <TextInput style={styles.input}
@@ -108,14 +111,15 @@ handleDisabled = () => {
             secureTextEntry={true}
             onChangeText={text => {
               this.handleDisabled()
-              this.setState({ password: text })}}
+              this.setState({ password: text })
+            }}
             value={this.state.password} />
-            <Text>{this.state.errorMsg} </Text>
+          <Text>{this.state.errorMsg} </Text>
         </View>
-        <TouchableOpacity 
-          style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button } 
-          onPress={() => this.handleSubmit(this.state.email, this.state.password, this.state.userName)} 
-          disabled= {this.state.isDisabled}
+        <TouchableOpacity
+          style={this.state.isDisabled ? [styles.button, styles.disabled] : styles.button}
+          onPress={() => this.handleSubmit(this.state.email, this.state.password, this.state.userName)}
+          disabled={this.state.isDisabled}
         >
           <Text style={styles.buttonText}> Registrar </Text>
         </TouchableOpacity>

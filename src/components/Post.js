@@ -58,9 +58,9 @@ export default class Post extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
-                    <Text style={styles.autor}>Email: {email}</Text>
+                    <Text style={styles.autor}>{email}</Text>
                 </View>
-                <Text style={styles.descripcion}>Descripcion: {descripcion}</Text>
+                <Text style={styles.descripcion}>{descripcion}</Text>
                 <View style={styles.likes}>
                     {this.state.like ? (
                         <TouchableOpacity onPress={() => this.handleUnlike()}>

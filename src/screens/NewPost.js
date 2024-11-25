@@ -20,7 +20,7 @@ export default class NewPost extends Component {
                 likes: []
             })
             .then(() => {
-                this.setState({ registered: true, errorMsg: "" });
+                this.setState({ registered: true, errorMsg: "", descripcion: '' });
                 this.props.navigation.navigate("Home");
             })
             .catch((e) => console.log(e.message))
@@ -48,6 +48,7 @@ export default class NewPost extends Component {
                         value={this.state.descripcion}
                         multiline={true}
                         numberofLines={4}
+
                     />
 
                     <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.descripcion)}>
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: '100%',
         paddingHorizontal: 20,
+        paddingVertical: 15,
         fontSize: 16,
         borderWidth: 1,
         borderColor: '#dfb084',
