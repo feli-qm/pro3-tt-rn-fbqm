@@ -42,12 +42,13 @@ export default class Home extends Component {
                     />
                 </View>
                 <Text style={styles.title}>Posts</Text>
-                {!this.state.loading && <FlatList
-                    data={this.state.posts}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <Post item={item} />
-                    )}
+                {!this.state.loading && 
+                    <FlatList
+                        data={this.state.posts}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                            <Post item={item} />
+                        )}
                 />}
 
             </View>
@@ -72,11 +73,11 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     title: {
-        fontSize: 28,
+        fontSize: 34,
         fontWeight: 'bold',
-        color: '#6f4e37',
-        marginBottom: 10,
+        color: '#703f30',
         textAlign: 'center',
+        marginBottom: 10,
     },
     description: {
         fontSize: 16,

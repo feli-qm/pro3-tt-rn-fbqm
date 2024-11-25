@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
 import { db } from '../firebase/config';
 
 export default class Users extends Component {
@@ -40,38 +40,40 @@ export default class Users extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <Text style={styles.title}>Users</Text>
-                    <Text style={styles.subtitle}>Search users</Text>
-
-                    <TextInput
-                        style={styles.input}
-                        keyboardType='email-address'
-                        placeholder='Filtrar email'
-                        onChangeText={this.userFilter}
-                        value={this.state.filterValue}
+                <View style={styles.logoContainer}>
+                    <Image style={styles.logo}
+                        source={require('../../assets/parfume-sinfondo.png')}
+                        resizeMode='contain'
                     />
-                    {this.state.usuariosFiltrados.length === 0 ? (
-                        <Text>El email no existe</Text>
-                    ) : (
-                        <FlatList
-                            style={styles.list}
-                            data={this.state.usuariosFiltrados}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({ item }) => (
-                                <View style={styles.userItem}>
-                                    <View style={styles.userInfo}>
-                                        <Text>Email: {item.data.email}</Text>
-                                        <Text>Username: {item.data.userName}</Text>
-                                        <Text>Created At: {item.data.createdAt}</Text>
-                                    </View>
-                                </View>
-                            )}
-                        />
-                    )}
-
-
                 </View>
+                
+                <Text style={styles.title}>Users</Text>
+                <Text style={styles.subtitle}>Search users</Text>
+
+                <TextInput
+                    style={styles.input}
+                    keyboardType='email-address'
+                    placeholder='Filtrar email'
+                    onChangeText={this.userFilter}
+                    value={this.state.filterValue}
+                />
+
+                {this.state.usuariosFiltrados.length === 0 ? (
+                    <Text>El email no existe</Text>
+                ) : (
+                    <FlatList
+                        data={this.state.usuariosFiltrados}
+                        keyExtractor={(item) => item.id}
+                        renderItem={({ item }) => (
+                                <View style={styles.userContainer}>
+                                    <Text>Email: {item.data.email}</Text>
+                                    <Text>Username: {item.data.userName}</Text>
+                                    <Text>Created At: {item.data.createdAt}</Text>                                
+                                </View>
+                            )
+                        }
+                    />
+                )}
             </View>
         );
     }
@@ -80,19 +82,18 @@ export default class Users extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#291009',
+        backgroundColor: '#f5f5f5',
+        paddingTop: 20,
+        paddingHorizontal: 20,
     },
-    formContainer: {
-        width: '100%',
-        maxWidth: 400,
-        paddingVertical: 40,
-        paddingHorizontal: 30,
-        backgroundColor: '#fffaf9',
-        borderRadius: 15,
+    logoContainer: {
         alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain',
     },
     title: {
         fontSize: 34,
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 20,
+        fontWeight: 'bold',
         color: '#703f30',
-        textAlign: 'center',
         margin: 10,
     },
     input: {
@@ -119,22 +120,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#703f30',
     },
-    userItem: {
-        padding: 15,
-        backgroundColor: '#f9f9f9',
-        marginVertical: 8,
-        borderRadius: 8,
-    },
-    userInfo: {
-        marginBottom: 10,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#dfb084',
-        borderRadius: 8,
-        backgroundColor: '#f2c2b8',
-    },
-    flatlist: {
-        flex: 1,
-        width: '100%',
-    }
+    userContainer: {
+        backgroundColor: '#fff',
+        borderRadius: 14,
+        marginBottom: 22,
+        padding: 14,
+        shadowColor: '#004',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 6,
+      },
 });

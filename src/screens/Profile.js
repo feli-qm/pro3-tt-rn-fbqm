@@ -85,6 +85,8 @@ export default class Profile extends Component {
           </TouchableOpacity>
         </View>
 
+        <Text style={styles.subtitle}>Tus Posts</Text>
+
         <FlatList
           data={this.state.userPosts}
           keyExtractor={(item) => item.id}
@@ -92,10 +94,6 @@ export default class Profile extends Component {
             <Post item={item} />
           )}
         />
-
-
-
-
       </View>
     );
   }
@@ -118,17 +116,14 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   userContainer: {
-    width: '100%',
-    maxWidth: 400,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    backgroundColor: '#fffaf9',
-    borderRadius: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 10,
-    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 14,
+    marginBottom: 22,
+    padding: 14,
+    shadowColor: '#004',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
   },
   image: {
     width: 150,
@@ -140,6 +135,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#703f30',
     textAlign: 'center',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#703f30',
     marginBottom: 10,
   },
   detail: {

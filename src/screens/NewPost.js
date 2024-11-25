@@ -19,47 +19,57 @@ export default class NewPost extends Component {
                 imagen: imagen,
                 descripcion: descripcion,
                 createdAt: Date.now(),
-                likes : []
+                likes: []
             })
             .then(() => {
                 this.setState({ registered: true, errorMsg: "" });
                 this.props.navigation.navigate("Home");
             })
             .catch((e) => console.log(e.message))
-
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <Image style={styles.image}
-                        source={require('../../assets/parfume.png')}
-                        resizeMode='contain' />
-                    <Text style={styles.title}>Nuevo post</Text>
+                <View style={styles.logoContainer}>
+                    <Image style={styles.logo}
+                        source={require('../../assets/parfume-sinfondo.png')}
+                        resizeMode='contain'
+                    />
+                </View>
 
-                    <TextInput style={styles.input}
+                <Text style={styles.title}>Nuevo Post</Text>
+                <Text style={styles.subtitle}>Ingrese los datos del post</Text>
+
+                <View style={styles.userContainer}>
+                    <TextInput
+                        style={styles.input}
                         keyboardType='default'
-                        placeholder='Ingrese su contenido del post'
+                        placeholder='Breve descripción'
                         onChangeText={text => this.setState({ descripcion: text })}
                         value={this.state.descripcion}
                         multiline={true}
-                        numberofLines={4} />
+                        numberofLines={4}
+                    />
 
-                    <TextInput style={styles.input}
+                    <TextInput 
+                        style={styles.input}
                         keyboardType='default'
-                        placeholder='Ingrese su imagen'
+                        placeholder='Una imagen'
                         onChangeText={text => this.setState({ imagen: text })}
                         value={this.state.imagen}
                         multiline={true}
-                        numberofLines={4} />
+                        numberofLines={4}
+                    />
 
                     <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.descripcion, this.state.imagen)}>
                         <Text style={styles.buttonText}> Crear post </Text>
                     </TouchableOpacity>
+
+                    {this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}
+
                 </View>
 
-                {this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}
 
             </View>
         );
@@ -69,23 +79,28 @@ export default class NewPost extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        backgroundColor: '#291009',
+        backgroundColor: '#f5f5f5',
+        paddingTop: 20,
+        paddingHorizontal: 20,
     },
-    formContainer: {
-        width: '100%',
-        maxWidth: 400,
-        paddingVertical: 40,
-        paddingHorizontal: 30,
-        backgroundColor: '#fffaf9',
-        borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.15,
-        shadowRadius: 10,
+    logoContainer: {
         alignItems: 'center',
+        marginBottom: 20,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain',
+    },
+    userContainer: {
+        backgroundColor: '#fff',
+        borderRadius: 14,
+        marginBottom: 22,
+        padding: 14,
+        shadowColor: '#004',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 6,
     },
     image: {
         width: 150,
@@ -94,45 +109,42 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 34,
-        fontFamily: 'Playfair Display',
         fontWeight: 'bold',
         color: '#703f30',
         textAlign: 'center',
-        marginBottom: 30,
+        marginBottom: 10,
+    },
+    subtitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#703f30',
+        margin: 10,
     },
     input: {
         height: 50,
         width: '100%',
         paddingHorizontal: 20,
         fontSize: 16,
-        fontFamily: 'Playfair Display',
         borderWidth: 1,
         borderColor: '#dfb084',
         borderRadius: 8,
         backgroundColor: '#f2c2b8',
-        marginBottom: 20,
+        marginBottom: 15,
+        marginTop: 5,
         color: '#703f30',
     },
     button: {
         backgroundColor: '#cd933f',
-        paddingVertical: 15,
+        paddingVertical: 5,
         width: '100%',
         borderRadius: 8,
         alignItems: 'center',
-        marginTop: 20,
-    },
-    buttonLink: {
-        backgroundColor: 'transparent',
-        paddingVertical: 10,
-        width: '100%',
-        alignItems: 'center',
-        marginTop: 15,
+        marginTop: 10,
     },
     buttonText: {
         color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 18,
-        fontFamily: 'Playfair Display',
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     errorMsg: {
         color: '#D32F2F',
