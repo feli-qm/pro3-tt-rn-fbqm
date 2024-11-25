@@ -48,7 +48,10 @@ export default class Login extends Component {
       })
       .catch((error) => {
         console.log(error.message);
-        this.setState({ errorMsg: error.message });
+        if (error.code === "auth/internal-error"){
+          this.setState({errorMsg: "Invalid login credentials"})
+        } else {
+        this.setState({ errorMsg: error.message });}
       });
   };
 
@@ -71,7 +74,7 @@ export default class Login extends Component {
 
           <TextInput style={styles.input}
             keyboardType='email-address'
-            placeholder='email'
+            placeholder='Ingrese su email'
             onChangeText={text => {
                 this.handleDisabled()
                 this.setState({ email: text })}}
@@ -79,7 +82,7 @@ export default class Login extends Component {
 
           <TextInput style={styles.input}
             keyboardType='default'
-            placeholder='password'
+            placeholder='Ingrese su password'
             secureTextEntry={true}
             onChangeText={text => {
                 this.handleDisabled()
