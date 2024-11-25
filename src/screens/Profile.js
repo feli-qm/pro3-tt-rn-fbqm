@@ -78,7 +78,7 @@ export default class Profile extends Component {
           <Text style={styles.detail}>User Name: {this.state.userName}</Text>
           <Text style={styles.detail}>Número de posts: {this.state.userPosts.length}</Text>
           {this.state.errorMsg ? (
-            <Text style={styles.error}>{this.state.errorMsg}</Text>
+            <Text>{this.state.errorMsg}</Text>
           ) : null}
           <TouchableOpacity style={styles.button} onPress={() => this.handleLogout()}>
             <Text style={styles.buttonText}>Logout</Text>
@@ -115,6 +115,13 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: 'contain',
   },
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    color: '#703f30',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
   userContainer: {
     backgroundColor: '#fff',
     borderRadius: 14,
@@ -124,24 +131,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
-  },
-  image: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    color: '#703f30',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#703f30',
-    marginBottom: 10,
   },
   detail: {
     fontSize: 16,
@@ -162,16 +151,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   },
-  errorMsg: {
-    color: '#D32F2F',
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  preview: {
-    marginTop: 20,
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-  },
+  subtitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#703f30',
+    marginBottom: 10,
+  }
 });

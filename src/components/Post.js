@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { FlatList } from 'react-native-web';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { PiHeartStraightFill } from "react-icons/pi";
@@ -55,7 +54,7 @@ export default class Post extends Component {
 
 
     render() {
-        const { email, imagen, likes, descripcion } = this.props.item.data;
+        const { email, likes, descripcion } = this.props.item.data;
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
@@ -65,11 +64,11 @@ export default class Post extends Component {
                 <View style={styles.likes}>
                     {this.state.like ? (
                         <TouchableOpacity onPress={() => this.handleUnlike()}>
-                            <PiHeartStraightFill style={styles.buttonLike} />
+                            <PiHeartStraightFill style={styles.buttonLikes} />
                         </TouchableOpacity>
                     ) : (
                         <TouchableOpacity onPress={() => this.handleLike()}>
-                            <PiHeartStraightLight style={styles.buttonUnike} />
+                            <PiHeartStraightLight style={styles.buttonLikes} />
                         </TouchableOpacity>
                     )}
                     <Text style={styles.contador}>{this.state.cantidad} Likes</Text>
@@ -117,10 +116,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    buttonLike: {
-        color: '#f2c2b8',
-    },
-    buttonUnike: {
+    buttonLikes: {
         color: '#f2c2b8',
     },
     contador: {
@@ -129,9 +125,6 @@ const styles = StyleSheet.create({
         marginLeft: 11,
     },
     deleteButton: {
-        color: '#f2c2b8'
-    },
-    deleteButtonText: {
         color: '#f2c2b8'
     }
 });

@@ -65,7 +65,6 @@ handleDisabled = () => {
               createdAt: Date.now()
             })
             .then(() => {
-              //redireccionar a login
               this.setState({ registered: true, errorMsg: "" });
               this.props.navigation.navigate("Login");
             })
@@ -191,13 +190,6 @@ const styles = StyleSheet.create({
   disabled: {
     backgroundColor: 'grey',
   },
-  buttonLink: {
-    backgroundColor: 'transparent',
-    paddingVertical: 10,
-    width: '100%',
-    alignItems: 'center',
-    marginTop: 15,
-  },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
@@ -211,11 +203,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
-  },
-  errorMsg: {
-    color: '#D32F2F',
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 10,
-  },
+  }
 });

@@ -78,11 +78,5 @@ const styles = StyleSheet.create({
         color: '#703f30',
         textAlign: 'center',
         marginBottom: 10,
-    },
-    description: {
-        fontSize: 16,
-        color: '#8f8f8f',
-        textAlign: 'center',
-        marginBottom: 20,
-    },
+    }   
 });

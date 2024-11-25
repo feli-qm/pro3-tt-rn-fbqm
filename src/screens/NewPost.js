@@ -7,16 +7,14 @@ export default class NewPost extends Component {
         super(props);
         this.state = {
             email: '',
-            imagen: '',
             descripcion: ''
         };
     }
 
-    handleSubmit(imagen, descripcion) {
+    handleSubmit(descripcion) {
         db.collection('posts')
             .add({
                 email: auth.currentUser.email,
-                imagen: imagen,
                 descripcion: descripcion,
                 createdAt: Date.now(),
                 likes: []
@@ -52,17 +50,7 @@ export default class NewPost extends Component {
                         numberofLines={4}
                     />
 
-                    <TextInput 
-                        style={styles.input}
-                        keyboardType='default'
-                        placeholder='Una imagen'
-                        onChangeText={text => this.setState({ imagen: text })}
-                        value={this.state.imagen}
-                        multiline={true}
-                        numberofLines={4}
-                    />
-
-                    <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.email, this.state.descripcion, this.state.imagen)}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.handleSubmit(this.state.descripcion)}>
                         <Text style={styles.buttonText}> Crear post </Text>
                     </TouchableOpacity>
 
