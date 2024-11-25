@@ -66,8 +66,8 @@ export default class Users extends Component {
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => (
                                 <View style={styles.userContainer}>
-                                    <Text style={styles.email}>Email: {item.data.email}</Text>
-                                    <Text>Username: {item.data.userName}</Text>                            
+                                    <Text style={styles.email}>{item.data.email}</Text>
+                                    <Text>{item.data.userName}</Text>                            
                                 </View>
                             )
                         }
