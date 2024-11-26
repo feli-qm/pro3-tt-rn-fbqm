@@ -52,13 +52,24 @@ export default class Post extends Component {
             .catch(error => console.error('Error eliminando post:', error));
     }
 
+    formatDate = (unixTimestamp) => {
+        const date = new Date(unixTimestamp); 
+        return date.toLocaleString('es-ES', { 
+          year: 'numeric', 
+          month: 'short', 
+          day: 'numeric', 
+          hour: '2-digit', 
+          minute: '2-digit' 
+        });
+      };
 
     render() {
-        const { email, likes, descripcion } = this.props.item.data;
+        const { email, descripcion } = this.props.item.data;
         return (
             <View style={styles.container}>
                 <View style={styles.containerHeader}>
                     <Text style={styles.autor}>{email}</Text>
+                    <Text style={styles.fecha}>{this.formatDate(this.props.item.data.createdAt)}</Text>
                 </View>
                 <Text style={styles.descripcion}>{descripcion}</Text>
                 <View style={styles.likes}>
@@ -104,6 +115,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: 'bold',
         color: '#703f30',
+    },
+    fecha: {
+          fontSize: 12,
+          color: '#aaa',
+          marginLeft: 10,
     },
     descripcion: {
         fontSize: 15,
