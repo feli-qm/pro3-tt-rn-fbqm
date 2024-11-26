@@ -53,15 +53,15 @@ export default class Post extends Component {
     }
 
     formatDate = (unixTimestamp) => {
-        const date = new Date(unixTimestamp); 
-        return date.toLocaleString('es-ES', { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric', 
-          hour: '2-digit', 
-          minute: '2-digit' 
+        const date = new Date(unixTimestamp);
+        return date.toLocaleString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
         });
-      };
+    };
 
     render() {
         const { email, descripcion } = this.props.item.data;
@@ -117,9 +117,9 @@ const styles = StyleSheet.create({
         color: '#703f30',
     },
     fecha: {
-          fontSize: 12,
-          color: '#aaa',
-          marginLeft: 10,
+        fontSize: 12,
+        color: '#aaa',
+        marginLeft: 10,
     },
     descripcion: {
         fontSize: 15,

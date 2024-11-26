@@ -39,7 +39,7 @@ export default class HomeMenu extends Component {
                     name="Profile"
                     component={Profile}
                     options={{
-                        tabBarIcon: () => ( //revisar si es necesario poner size={size} color={color} o esta ok asi
+                        tabBarIcon: () => (
                             <Ionicons name="person" size={24} color="black" />
                         ),
                         headerShown: false

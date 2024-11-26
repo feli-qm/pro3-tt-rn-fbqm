@@ -43,7 +43,7 @@ export default class Login extends Component {
 
     auth.
       signInWithEmailAndPassword(email, pass)
-      .then((response) => {
+      .then(() => {
         this.setState({ registered: true, errorMsg: "" })
         this.props.navigation.navigate('HomeMenu')
       })

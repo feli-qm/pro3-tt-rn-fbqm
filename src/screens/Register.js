@@ -124,8 +124,6 @@ export default class Register extends Component {
           <Text style={styles.buttonText}> Registrar </Text>
         </TouchableOpacity>
 
-        {/*{this.state.errorMsg && <Text>{this.state.errorMsg}</Text>}*/}
-
         <TouchableOpacity
           style={styles.buttonRedirect}
           onPress={() => this.props.navigation.navigate('Login')}>

@@ -38,15 +38,15 @@ export default class Users extends Component {
     };
 
     formatDate = (unixTimestamp) => {
-        const date = new Date(unixTimestamp); 
-        return date.toLocaleString('es-ES', { 
-          year: 'numeric', 
-          month: 'short', 
-          day: 'numeric', 
-          hour: '2-digit', 
-          minute: '2-digit' 
+        const date = new Date(unixTimestamp);
+        return date.toLocaleString('es-ES', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
         });
-      };
+    };
 
     render() {
         return (
